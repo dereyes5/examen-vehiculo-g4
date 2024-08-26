@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <style>
+        .menu-links {
+            margin-top: 20px;
+        }
+        .menu-links a {
+            margin: 10px;
+            padding: 15px 30px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Aplicación 3er Parcial</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/vehiculos">Vehículos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/matriculas">Matrículas</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container text-center mt-5">
+    <div class="text-center mb-4">
+        <h2 class="display-4">[[${pageTitle}]]</h2>
+    </div>
+    <form th:action="@{/vehiculos/save}" method="post" th:object="${vehiculo}" class="border rounded shadow-sm p-4 bg-light"
+          style="max-width: 600px; margin: 0 auto;">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="placa" class="form-label">Placa:</label>
+            <input type="text" th:field="*{placa}" class="form-control" id="placa" required minlength="7" maxlength="7" placeholder="Enter the plate"/>
+        </div>
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marca:</label>
+            <select th:field="*{marca.id}" class="form-select" id="marca" required>
+                <option value="">Select a brand</option>
+                <option th:each="marca : ${marcas}" th:value="${marca.id}" th:text="${marca.descripcion}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="motor" class="form-label">Motor:</label>
+            <input type="text" th:field="*{motor}" class="form-control" id="motor" required minlength="5" maxlength="15" placeholder="Enter the motor"/>
+        </div>
+        <div class="mb-3">
+            <label for="chasis" class="form-label">Chasis:</label>
+            <input type="text" th:field="*{chasis}" class="form-control" id="chasis" required minlength="5" maxlength="15" placeholder="Enter the chasis"/>
+        </div>
+        <div class="mb-3">
+            <label for="combustible" class="form-label mb-0">Combustible:</label>
+            <input type="text" th:field="*{combustible}" class="form-control" id="combustible" required minlength="5" maxlength="15" placeholder="Enter the fuel"/>
+        </div>
+        <div class="mb-3">
+            <label for="anio" class="form-label">Año:</label>
+            <input type="number" th:field="*{anio}" class="form-control" id="anio" required min="1900" max="2022" placeholder="Enter the year"/>
+        </div>
+        <div class="mb-3">
+            <label for="foto" class="form-label">Foto:</label>
+            <input type="text" th:field="*{foto}" class="form-control" id="foto" required minlength="5" maxlength="100" placeholder="Enter the photo"/>
+        </div>
+        <div class="form-group">
+            <label for="color">Color</label>
+            <select id="color" name="color.id" class="form-control" th:field="*{color.id}">
+                <option value="" disabled selected>Seleccione un color</option>
+                <option th:each="color : ${colores}"
+                        th:value="${color.id}"
+                        th:text="${color.descripcion}"></option>
+            </select>
+        <div class="mb-3">
+            <label for="avaluo" class="form-label">Avaluo:</label>
+            <input type="number" th:field="*{avaluo}" class="form-control" id="avaluo" required min="0" max="1000000" placeholder="Enter the valuation"/>
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+            <button type="button" class="btn btn-secondary btn-lg" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/vehiculos}]]";
+    }
+</script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

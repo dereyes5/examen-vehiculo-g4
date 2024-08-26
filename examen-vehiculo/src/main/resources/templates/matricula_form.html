@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <style>
+        .menu-links {
+            margin-top: 20px;
+        }
+        .menu-links a {
+            margin: 10px;
+            padding: 15px 30px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Aplicación 3er Parcial</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/vehiculos">Vehículos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/matriculas">Matrículas</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container text-center mt-5">
+    <div class="text-center mb-4">
+        <h2 class="display-4">[[${pageTitle}]]</h2>
+    </div>
+    <form th:action="@{/matriculas/save}" method="post" th:object="${matricula}" class="border rounded shadow-sm p-4 bg-light"
+          style="max-width: 600px; margin: 0 auto;">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha:</label>
+            <input type="date" th:field="*{fecha}" class="form-control" id="fecha" required>
+        </div>
+        <div class="mb-3">
+            <label for="vehiculo" class="form-label">Vehículo:</label>
+            <select th:field="*{vehiculo}" class="form-select" id="vehiculo" required>
+                <option th:each="vehiculo : ${vehiculos_get}" th:value="${vehiculo.id}" th:text="${vehiculo.placa}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="agencia" class="form-label">Agencia:</label>
+            <select th:field="*{agencia}" class="form-select" id="agencia" required>
+                <option th:each="agencia : ${agencias}" th:value="${agencia.id}" th:text="${agencia.descripcion}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="anio" class="form-label">Año:</label>
+            <input type="number" th:field="*{anio}" class="form-control" id="anio" required>
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+            <button type="button" class="btn btn-secondary btn-lg" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/vehiculos}]]";
+    }
+</script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

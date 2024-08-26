@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <style>
+        .menu-links {
+            margin-top: 20px;
+        }
+        .menu-links a {
+            margin: 10px;
+            padding: 15px 30px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Aplicación 3er Parcial</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/vehiculos">Vehículos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/matriculas">Matrículas</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container text-center mt-5">
+    <h1 class="display-4">APLICACIÓN GRUPO 4</h1>
+    <p class="lead">Administra vehículos y matrículas de manera sencilla</p>
+    <div class="menu-links">
+        <a href="/vehiculos" class="btn btn-primary btn-lg">Administrar Vehículos</a>
+        <a href="/matriculas" class="btn btn-success btn-lg">Administrar Matrículas</a>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
